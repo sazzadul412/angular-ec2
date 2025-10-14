@@ -1,20 +1,41 @@
 version: 0.2
+
+env:
+  variables:
+    NODE_OPTIONS: "--max-old-space-size=4096 --openssl-legacy-provider"
+    ANGULAR_OUTPUT_DIR: "dist/my-angular-project"   # <-- Match angular.json
+
 phases:
   install:
     runtime-versions:
-      nodejs: 12
+      nodejs: 16    # Node 16 is stable and supports Angular 9
     commands:
+      - echo "Installing Angular CLI and dependencies..."
       - npm install -g @angular/cli@9.0.6
+      - npm ci
+
   pre_build:
     commands:
-      - npm install
+      - echo "Checking installed Node and npm versions..."
+      - node -v
+      - npm -v
+
   build:
     commands:
-      - ng build --prod
+      - echo "Starting Angular production build..."
+      - npx ng build --configuration production
     finally:
-      - echo This is the finally block execution!
+      - echo "Build phase complete (finally block)."
+
+  post_build:
+    commands:
+      - echo "Build completed successfully!"
+      # Optional: If deploying to S3, uncomment the next line:
+      # - aws s3 sync $ANGULAR_OUTPUT_DIR s3://your-s3-bucket-name --delete
+
 artifacts:
-  base-directory: dist/my-angular-project
+  base-directory: $ANGULAR_OUTPUT_DIR
   files:
     - '**/*'
+
 
