@@ -19,7 +19,7 @@ phases:
       - echo "This is the finally block execution!"
 
 artifacts:
-  base-directory: dist/code-pipeline-website  # update to your real Angular dist folder
+  base-directory: dist/my-angular-project  # update to your real Angular dist folder
   files:
     - '**/*'
 
