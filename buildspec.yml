@@ -14,7 +14,7 @@ phases:
 
   build:
     commands:
-      - ng build --configuration production
+      - npx ng build --configuration production
     finally:
       - echo "This is the finally block execution!"
 
