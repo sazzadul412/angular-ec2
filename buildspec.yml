@@ -1,4 +1,9 @@
 version: 0.2
+
+env:
+  variables:
+    NODE_OPTIONS: "--max-old-space-size=4096"
+
 phases:
   install:
     runtime-versions:
@@ -6,16 +11,15 @@ phases:
     commands:
       - npm install -g @angular/cli
       - npm ci
-  pre_build:
-    commands:
-      - npm install
+
   build:
     commands:
       - ng build --configuration production
-
     finally:
-      - echo This is the finally block execution!
+      - echo "This is the finally block execution!"
+
 artifacts:
-  base-directory: dist/my-angular-project
+  base-directory: dist/code-pipeline-website  # update to your real Angular dist folder
   files:
     - '**/*'
+
