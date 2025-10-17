@@ -1,2 +1,3 @@
-sudo service nginx start
-sudo chkconfig nginx on
+#!/bin/bash
+
+sudo service nginx restart
