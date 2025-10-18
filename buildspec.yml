@@ -38,4 +38,4 @@ artifacts:
   files:
     - '**/*'                             # Include all files in dist
     - appspec.yml                         # Include appspec for CodeDeploy
-    - 'deploy-scripts/**/*'               # Include deployment scripts
+    - 'scripts/**/*'               # Include deployment scripts
